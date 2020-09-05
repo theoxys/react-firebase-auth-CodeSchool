@@ -81,7 +81,7 @@ const Login = ({history}: RouteComponentProps) => {
       </BackgroundContainer>
       <AuthContainer>
         {loading?
-        <ReactLoading color={'white'} type={"bubbles"}/> : 
+        <ReactLoading color={'#5268f4'} type={"bubbles"} height={'30%'} width={'30%'} /> : 
         <>
           <Title style={{fontSize: 25}}>Study time! Connect to continue learning</Title>
           <Subtitle style={{marginTop: 20, opacity: 0.6}}>Log in to access the best web development courses available online!</Subtitle>
