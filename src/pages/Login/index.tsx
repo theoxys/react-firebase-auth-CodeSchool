@@ -1,16 +1,18 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useState, useContext } from 'react';
 
 import { Container, Formulario, BackgroundContainer, AuthContainer, Title, Input, Button, LogoImg, VideoButton, Circle, Row, CheckBox, Subtitle, RoundButton } from './styles';
 import { AuthConfig, GoogleProvider, FacebookProvider } from '../../auth/config';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 import Logo from '../../assets/logo.png'
 import {FaUserCircle, FaPlay, FaGoogle, FaFacebookSquare} from 'react-icons/fa'
 import {IoIosLock} from 'react-icons/io'
 import Swal from 'sweetalert2'
 import ReactLoading from 'react-loading'
+import { AuthContext } from '../../auth/authContext';
 
 const Login = ({history}: RouteComponentProps) => {
   const [loading, setLoading] = useState(false);
+  const {user} = useContext(AuthContext);
 
   const handleGoogleAuth = useCallback(async()=>{
     try {
@@ -48,7 +50,6 @@ const Login = ({history}: RouteComponentProps) => {
           title: 'Oops...',
           text: error.message,
           customClass:{
-            container: 'swal-container-class',
             confirmButton: 'swal-confirm-button-class',
           }}
         );
@@ -57,6 +58,12 @@ const Login = ({history}: RouteComponentProps) => {
       }
     }, []
   )
+
+  if(user){
+    return(
+      <Redirect to="/"></Redirect>
+    )
+  }
 
   return (
     <Container>

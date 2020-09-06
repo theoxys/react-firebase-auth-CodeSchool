@@ -1,21 +1,52 @@
 import React, { useCallback } from 'react';
 import { Container, Formulario, BackgroundContainer, AuthContainer, Title, Input, Button, LogoImg, VideoButton, Circle, Row, CheckBox, Subtitle, RoundButton } from '../Login/styles';
-import { AuthConfig } from '../../auth/config';
+import { AuthConfig, GoogleProvider, FacebookProvider } from '../../auth/config';
 import { withRouter, RouteComponentProps } from 'react-router-dom';
 import Logo from '../../assets/logo.png'
 import {FaUserCircle, FaPlay, FaGoogle, FaFacebookSquare} from 'react-icons/fa'
 import {IoIosLock} from 'react-icons/io'
 import {MdMailOutline} from 'react-icons/md'
+import Swal from 'sweetalert2';
 
 const Register = ({history}: RouteComponentProps) => {
+
+  const handleGoogleAuth = useCallback(async()=>{
+    try {
+      var result = await AuthConfig.auth().signInWithPopup(GoogleProvider);
+      alert(result.user);
+      console.log(result.user);
+    } catch (error) {
+      alert(error);
+    }
+  }, [])
+
+  const handleFacebookAuth = useCallback(async()=>{
+    try {
+      var result = await AuthConfig.auth().signInWithPopup(FacebookProvider);
+      alert('Seja bem vindo ' + result.user?.displayName);
+      console.log(result.user);
+    } catch (error) {
+      alert(error);
+    }
+  }, [])
 
   const handleRegister = useCallback(
     async(event) => {
       event.preventDefault();
-      
-      const {email, senha} = event.target.elements;
-      await AuthConfig.auth().createUserWithEmailAndPassword(email.value, senha.value);
-      history.push("/");
+      try {
+        const {email, senha} = event.target.elements;
+        await AuthConfig.auth().createUserWithEmailAndPassword(email.value, senha.value);
+        history.push("/");
+      } catch (error) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: error.message,
+          customClass:{
+            confirmButton: 'swal-confirm-button-class',
+          }}
+          )
+      }
     }, []
   )
 
@@ -60,8 +91,8 @@ const Register = ({history}: RouteComponentProps) => {
       </form>
       <Subtitle style={{opacity: 0.6, marginBottom:20}}>Or continue with these social profile</Subtitle>
       <Row>
-        <RoundButton onClick={()=>{}}><FaGoogle style={{height:25, width:25}}/></RoundButton>
-        <RoundButton onClick={()=>{}}><FaFacebookSquare style={{height:25, width:25}}/></RoundButton>
+        <RoundButton onClick={handleGoogleAuth}><FaGoogle style={{height:25, width:25}}/></RoundButton>
+        <RoundButton onClick={handleFacebookAuth}><FaFacebookSquare style={{height:25, width:25}}/></RoundButton>
       </Row>
       <Title style={{fontSize: 14}}>
         Already a member ? 

@@ -10,14 +10,16 @@ import GlobalStyles from './styles/GlobalStyles'
 
 function App() {
   return (
+    <>
     <AuthProvider>
       <BrowserRouter>
         <PrivateRoute exact path="/" component={Home}/>
         <Route exact path="/login" component={Login}/>
         <Route exact path="/register" component={Register}/>
       </BrowserRouter>
-      <GlobalStyles/>
     </AuthProvider>
+    <GlobalStyles/>
+    </>
   );
 }
 

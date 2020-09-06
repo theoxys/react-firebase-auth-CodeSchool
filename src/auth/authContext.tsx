@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { createContext } from 'vm';
 import { AuthConfig } from './config';
+import { Container } from '../pages/Login/styles';
+import ReactLoading from 'react-loading'
 
 interface AuthContextData {
     user: object | null;
@@ -21,7 +23,9 @@ export const AuthProvider: React.FC = ({children}) => {
 
     if(loading){
         return(
-            <div>carregando . . .</div>
+            <Container style={{justifyContent: 'center', alignItems: 'center'}}>
+                <ReactLoading color={'#5268f4'} type={'bubbles'}></ReactLoading>
+            </Container>
         )
     }
 

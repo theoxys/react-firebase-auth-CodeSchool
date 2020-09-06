@@ -1,0 +1,51 @@
+.swal-container-class{
+    background-color: #000;
+}
+
+.swal-confirm-button-class{
+    background-color: #5268F4 !important;
+    border: 0 !important;
+    outline: 0 !important;
+    font-weight: 700 !important;
+    transition: all 0.3s !important;
+}
+.swal-confirm-button-class:focus{
+    background-color: #5268F4 !important;
+    border: 0 !important;
+    outline: 0 !important;
+    font-weight: 700 !important;
+    box-shadow: none !important;
+}
+.swal-confirm-button-class:hover{
+    position: relative;
+    bottom: 5px;
+    box-shadow: 2px 2px 8px 0px rgba(82,104,244,0.50) !important;
+}
+
+
+.swal2-popup{
+    background-color: #1c1e21 !important;
+    color: white !important;
+    border-radius: 10px !important;
+    padding: 10px !important;
+    box-shadow: 2px 2px 20px 0px rgba(0,0,0,0.50) !important;
+}
+
+.swal2-title{
+    color: white !important;
+}
+.swal2-html-container{
+    color: white !important;
+}
+
+.swal2-x-mark-line-left{
+    background-color: #5268F4 !important;
+}
+
+.swal2-x-mark-line-right{
+    background-color: #5268F4 !important;
+}
+
+.swal2-icon.swal2-error{
+    border-color: #5268F4 !important;
+}
