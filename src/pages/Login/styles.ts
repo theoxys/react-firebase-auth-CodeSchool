@@ -72,7 +72,7 @@ export const Input = styled.input`
 
 export const Button = styled.button`
     height: 40px;
-    border-radius: 5px;
+    border-radius: 10px;
     border: 0;
     outline: 0;
     background-color: #5268f4;
@@ -83,7 +83,7 @@ export const Button = styled.button`
     margin-bottom: 20px;
 
     &:hover{
-        width: calc(100% + 10px);
+        transform: scale(1.03);
         position: relative;
         bottom: 5px;
         box-shadow: 2px 2px 8px 0px rgba(82,104,244,0.50);
@@ -139,7 +139,7 @@ export const VideoButton = styled.button`
     }
 
     transition-duration: 0.15s;
-    animation-delay: 0.1s;
+    animation-delay: 0.1s ease-in-out;
 `;
 
 export const CheckBox = styled.input`

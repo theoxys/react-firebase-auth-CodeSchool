@@ -46,6 +46,7 @@ const Login = ({history}: RouteComponentProps) => {
         setLoading(false)
       } catch (error) {
         Swal.fire({
+          confirmButtonText: 'Ok',
           icon: 'error',
           title: 'Oops...',
           text: error.message,

@@ -7,7 +7,11 @@
     border: 0 !important;
     outline: 0 !important;
     font-weight: 700 !important;
-    transition: all 0.3s !important;
+    transition: all 0.2s !important;
+    border-radius: 10px !important;
+    font-size: 14px !important;
+    height: 40px !important;
+    width: fit-content !important;
 }
 .swal-confirm-button-class:focus{
     background-color: #5268F4 !important;
@@ -20,6 +24,7 @@
     position: relative;
     bottom: 5px;
     box-shadow: 2px 2px 8px 0px rgba(82,104,244,0.50) !important;
+    transform: scale(1.05);
 }
 
 
@@ -33,9 +38,13 @@
 
 .swal2-title{
     color: white !important;
+    font-family: 'Kumbh Sans';
+    font-size: 20px;
 }
 .swal2-html-container{
     color: white !important;
+    font-family: 'Kumbh Sans';
+    font-size: 14px;
 }
 
 .swal2-x-mark-line-left{
@@ -48,4 +57,5 @@
 
 .swal2-icon.swal2-error{
     border-color: #5268F4 !important;
+    box-shadow: 2px 2px 8px 0px rgba(82,104,244,0.50);
 }

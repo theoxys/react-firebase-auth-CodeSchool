@@ -1,14 +1,16 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useContext } from 'react';
 import { Container, Formulario, BackgroundContainer, AuthContainer, Title, Input, Button, LogoImg, VideoButton, Circle, Row, CheckBox, Subtitle, RoundButton } from '../Login/styles';
 import { AuthConfig, GoogleProvider, FacebookProvider } from '../../auth/config';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { withRouter, RouteComponentProps, Redirect } from 'react-router-dom';
 import Logo from '../../assets/logo.png'
 import {FaUserCircle, FaPlay, FaGoogle, FaFacebookSquare} from 'react-icons/fa'
 import {IoIosLock} from 'react-icons/io'
 import {MdMailOutline} from 'react-icons/md'
 import Swal from 'sweetalert2';
+import { AuthContext } from '../../auth/authContext';
 
 const Register = ({history}: RouteComponentProps) => {
+  const {user} = useContext(AuthContext);
 
   const handleGoogleAuth = useCallback(async()=>{
     try {
@@ -40,6 +42,7 @@ const Register = ({history}: RouteComponentProps) => {
       } catch (error) {
         Swal.fire({
           icon: 'error',
+          confirmButtonText: 'Ok',
           title: 'Oops...',
           text: error.message,
           customClass:{
@@ -50,6 +53,12 @@ const Register = ({history}: RouteComponentProps) => {
     }, []
   )
 
+  if(user){
+    return(
+      <Redirect to="/"></Redirect>
+    )
+  }
+  
   return (
     <Container>
     <BackgroundContainer>
@@ -102,5 +111,4 @@ const Register = ({history}: RouteComponentProps) => {
   </Container>
   );
 };
-
 export default withRouter(Register);
