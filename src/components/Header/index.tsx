@@ -1,11 +1,16 @@
 import React, { useCallback } from 'react';
 
-import { Container, Avatar, RowLeft, RowRigth } from './styles';
-import { Title, Button, RoundButton } from '../../pages/Login/styles';
+import { Container, Avatar, RowLeft, RowRigth, RoundButton } from './styles';
+import { Title, Button, Subtitle } from '../../pages/Login/styles';
 import {HiOutlineLogout} from 'react-icons/hi'
 import { AuthConfig } from '../../auth/config';
 
-const Header: React.FC = () => {
+interface UserData{
+  displayName: string;
+  photoUrl: string;
+}
+
+const Header: React.FC<UserData> = ({displayName, photoUrl}) => {
   const handleLogOut = useCallback( async()=> {
     await AuthConfig.auth().signOut();
   }, [])
@@ -13,12 +18,14 @@ const Header: React.FC = () => {
   return (
     <Container>
       <RowLeft>
-        <Title>Home</Title>
+        <RoundButton onClick={handleLogOut}> 
+          <HiOutlineLogout style={{width:20,height:20, marginRight: 5}}/> 
+          <Subtitle>Logout</Subtitle>
+        </RoundButton>
       </RowLeft>
       <RowRigth>
-        <RoundButton style={{width:30,height:30}} onClick={handleLogOut}> <HiOutlineLogout style={{width:20,height:20}}/> </RoundButton>
-        <Title>Matheus Ferreira</Title>
-        <Avatar></Avatar>
+          <Title>{displayName}</Title>
+        <Avatar style={{backgroundImage: `url(${photoUrl})`, backgroundSize: 'cover'}}></Avatar>
       </RowRigth>
     </Container>
   );

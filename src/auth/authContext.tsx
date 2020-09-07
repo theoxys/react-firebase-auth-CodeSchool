@@ -16,6 +16,7 @@ export const AuthProvider: React.FC = ({children}) => {
 
     useEffect(() => {
         AuthConfig.auth().onAuthStateChanged((resp) => {
+            AuthConfig.auth().currentUser?.reload();
             setUser(resp);
             setLoading(false);
         })

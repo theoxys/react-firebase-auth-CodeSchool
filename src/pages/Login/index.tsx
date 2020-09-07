@@ -27,8 +27,15 @@ const Login = ({history}: RouteComponentProps) => {
   const handleFacebookAuth = useCallback(async()=>{
     try {
       var result = await AuthConfig.auth().signInWithPopup(FacebookProvider);
-      alert('Seja bem vindo ' + result.user?.displayName);
       console.log(result.user);
+      if (result.user?.photoURL?.indexOf('https://graph.facebook.com') != -1 && result.user?.photoURL?.indexOf('?type=large') == -1){
+        let newPhotoURL:string = result.user?.photoURL + '?type=large';
+        await AuthConfig.auth().currentUser?.updateProfile({
+            photoURL: newPhotoURL
+          });
+        window.location.reload(false);
+      }
+      await AuthConfig.auth().currentUser?.reload();
     } catch (error) {
       alert(error);
     }

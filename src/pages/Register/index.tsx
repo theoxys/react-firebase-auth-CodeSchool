@@ -25,8 +25,13 @@ const Register = ({history}: RouteComponentProps) => {
   const handleFacebookAuth = useCallback(async()=>{
     try {
       var result = await AuthConfig.auth().signInWithPopup(FacebookProvider);
-      alert('Seja bem vindo ' + result.user?.displayName);
       console.log(result.user);
+      if (result.user?.photoURL?.indexOf('https://graph.facebook.com') != -1 && result.user?.photoURL?.indexOf('?type=large') == -1){
+        let newPhotoURL:string = result.user?.photoURL + '?type=large';
+        await AuthConfig.auth().currentUser?.updateProfile({
+            photoURL: newPhotoURL
+          });
+      }
     } catch (error) {
       alert(error);
     }
@@ -36,8 +41,14 @@ const Register = ({history}: RouteComponentProps) => {
     async(event) => {
       event.preventDefault();
       try {
-        const {email, senha} = event.target.elements;
+        const {email, senha, name} = event.target.elements;
         await AuthConfig.auth().createUserWithEmailAndPassword(email.value, senha.value);
+        await AuthConfig.auth().currentUser?.updateProfile({
+          displayName: name.value,
+          photoURL: 'https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_1280.png'
+        });
+        setTimeout(()=>{}, 20000);
+
         history.push("/");
       } catch (error) {
         Swal.fire({
@@ -48,7 +59,7 @@ const Register = ({history}: RouteComponentProps) => {
           customClass:{
             confirmButton: 'swal-confirm-button-class',
           }}
-          )
+        )
       }
     }, []
   )
